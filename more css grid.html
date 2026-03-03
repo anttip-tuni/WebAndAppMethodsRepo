@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .box {
+            background-color: navy;
+            color: white;
+            border-radius: 0.5rem;
+            text-align: center;
+            padding: 1rem;
+            overflow-wrap: anywhere; /* Make text break at any point/character */
+        }
+
+        #demo1{
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        }
+
+        #demo2{
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: 200px 1fr auto; /* 200px fixed, 1fr is flexible (takes 1 fraction of remaining space after the other elements), auto = only as wide as content */
+        }
+
+            #demo3{
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                gap: 0.5rem;
+            }
+
+            #demo4 {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 0.5rem;
+            }
+
+            .span2 {
+                grid-column: span 2; /* GRID: this item should span 2 columns */
+            }
+
+            .span3fromstart{
+                grid-column: 1/4; /* GRID: this item should span from line 1 to line 4 */
+                grid-row: span 2; /* GRID: this item should span 2 rows */
+            }
+
+            .fullwidth {
+                grid-column: 1/-1; /* GRID: this item should span from line 1 to the last line (span all columns) */
+            }
+
+        body>div {
+            margin: 1rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: rgb(40, 40, 40);
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>No explicit row control (we add rows dynamically with b key)</h1>
+
+    <div id="demo1">
+
+        <!-- Sometimes you want to control the rows carefully, like in the Holy Grail layout we did. But often you only define the columns and let rows just flow automatically -->
+
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+
+    </div>
+
+    <h1>You can mix and match size units to achieve the effect that you need</h1>
+
+    <div id="demo2">
+        <div class="box">200px</div>
+        <div class="box">1fr (flexible)</div>
+        <div class="box">auto (only grows as much as the content forces it to grow)</div>
+    </div>
+
+    <h1>Different kinds of spans for both columns and rows</h1>
+
+    <div id="demo3">
+        <div class="box span3fromstart">box span 3 columns from start</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box span2">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+        <div class="box">box</div>
+    </div>
+
+    <h1>Negative track numbers can be helpful</h1>
+
+    <div id="demo4">
+        <div class="box fullwidth">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+        <div class="box">Element</div>
+    </div>
+
+    <script>
+
+        let boxnumber = 6;
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'b' || event.key === 'B' ){
+                boxnumber++;
+                const mybox = document.createElement('div');
+                mybox.textContent = boxnumber;
+                mybox.className = 'box';
+                const container = document.querySelector('#demo1');
+                container.appendChild(mybox);
+            }
+        })
+    </script>
+    
+</body>
+</html>
