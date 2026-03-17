@@ -148,6 +148,15 @@
             background-clip: text;
             color: transparent;
         }
+
+        #responsive h1 {
+            font-size: clamp(1.5rem, 4vw, 5rem); /* Minimum, preferred, maximum */;
+        }
+
+        #responsive-text-wrap {
+            overflow-wrap: anywhere;
+        }
+        
     </style>
 
 </head>
@@ -192,6 +201,14 @@
             <h1 class="reflectionDemoNormal">Reflection</h1>
             <h1 class="reflectionDemoReflection">Reflection</h1>
         </div>
+    </div>
+
+    <div id="responsive" class="exampleContainer">
+        <h1>Responsive Text</h1>
+    </div>
+
+    <div id="responsive-text-wrap" class="exampleContainer">
+        <h1>Text that wraps anywhere</h1>
     </div>
 
 
